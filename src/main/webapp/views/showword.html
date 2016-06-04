@@ -1,0 +1,82 @@
+<div>
+    <div class="col-xs-12"><h2 class="mt0"><span ng-bind="showWordVM.word"></span></h2></div>
+    <div class="col-xs-12">
+        <div class="panel panel-default"
+             ng-init="word.displaySequence = (word.status!='published')?'personal':currentUser.dicSequence.sequence[word.dictionary.id]"
+             ng-hide="currentUser.dicSequence.checkList.indexOf(word.dictionary.id)== -1"
+             ng-repeat="word in showWordVM.wordDetail | orderBy: ['displaySequence']">
+            <div class="panel-heading">
+                <span ng-bind="word.status=='published'?word.dictionary.displayName:word.author.displayName"></span>
+                <div class="text-primary pull-right">
+                    <button has-permission="Admin" class="btn btn-success btn-xs hide" data-toggle="modal"
+                            data-target="#pubulishWordConfirmModal"
+                            ng-click="showWordVM.publishWordConfirm(word.id)"><span
+                            class="glyphicon glyphicon-upload">发布</span></button>
+                    <button has-permission="Admin Editor" is-editable="{{word}}" class="btn btn-warning btn-xs hide"
+                            ng-init="word.isEdit=false"
+                            ng-click="word.isEdit = !word.isEdit">
+                      <span ng-hide="word.isEdit" class="glyphicon glyphicon-edit">编辑</span>
+                      <span ng-hide="!word.isEdit" class="glyphicon glyphicon-remove-circle">取消</span>
+                    </button>
+                    <button has-permission="Admin Editor" is-editable="{{word}}" class="btn btn-danger btn-xs hide" data-toggle="modal"
+                            data-target="#deleteWordConfirmModal"
+                            ng-click="showWordVM.deleteWordConfirm(word.id)">
+                        <span class="glyphicon glyphicon-remove">删除</span></button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div ng-hide="word.isEdit">
+                    <show-word word="word"></show-word>
+                </div>
+                <div ng-hide="!word.isEdit">
+                    <create-word word="word"></create-word>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!--delete word confirm modal-->
+<div class="modal fade" id="deleteWordConfirmModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+          aria-hidden="true">&times;</span></button>
+        <h2 class=" mt0">删除确认</h2>
+      </div>
+      <div class="modal-body">
+        <div class="error-text"><span class="glyphicon glyphicon glyphicon-alert"></span>您确定要删除选中的词条吗？</div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal">取消</button>
+        <button class="btn btn-danger" ng-click="showWordVM.deleteWord()">删除</button>
+        <!--<button class="btn btn-danger" ng-hide="!vm.isDeleteAll" ng-click="vm.deleteAll()">删除</button>
+        <button class="btn btn-danger" ng-hide="vm.isDeleteAll" ng-click="vm.deleteWord()">删除</button>-->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--publish word confirm modal-->
+<div class="modal fade" id="pubulishWordConfirmModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+          aria-hidden="true">&times;</span></button>
+        <h2 class=" mt0">发布确认</h2>
+      </div>
+      <div class="modal-body">
+        <div class="error-text"><span class="glyphicon glyphicon glyphicon-alert"></span>您确定要发布选中的词条吗？</div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal">取消</button>
+        <button class="btn btn-danger" ng-click="showWordVM.publishWord()">发布</button>
+        <!--<button class="btn btn-danger" ng-hide="!vm.isPublishAll" ng-click="vm.publishAll()">发布</button>
+        <button class="btn btn-danger" ng-hide="vm.isPublishAll" ng-click="vm.publishWord()">发布</button>-->
+      </div>
+    </div>
+  </div>
+</div>

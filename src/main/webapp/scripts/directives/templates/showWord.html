@@ -1,0 +1,83 @@
+<div ng-hide="vm.word.isEdit">
+    <div class="form-group form-group-sm mt10" ng-hide="vm.word.template =='freeStyle' || vm.word.xici == '' || vm.word.xici == undefined">
+        <label class="text-info">【析词】</label>
+
+        <div class="col-xs-12">
+            <span ng-bind-html="vm.word.xici"></span>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="form-group form-group-sm mt4 mb4" ng-hide="vm.word.template =='freeStyle' || vm.word.duiyingciList == '' || vm.word.duiyingciList == undefined">
+        <label class="text-info">【对译词】</label>
+
+        <div class="row mt4">
+            <div class="col-sm-6">
+                <table class="table table-condensed table-bordered">
+                    <tr ng-repeat="duiyingci in vm.word.duiyingciList">
+                        <td class="col-md-2">{{duiyingci.name}}</td>
+                        <td class="col-md-9">{{duiyingci.value}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group form-group-sm mt4" ng-hide="vm.word.template =='freeStyle' || vm.word.cigenlaiyuan == '' || vm.word.cigenlaiyuan == undefined">
+        <label class="text-info">【词根来源】</label>
+
+        <div class="col-xs-12">
+            <span ng-bind-html="vm.word.cigenlaiyuan"></span>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="form-group form-group-sm mt4 mb4" ng-hide="vm.word.shiyi == '' || vm.word.shiyi == undefined">
+        <label class="text-info">【释义】</label>
+
+        <div class="col-xs-12">
+            <span ng-bind-html="vm.word.shiyi | unsafe"></span>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="form-group form-group-sm mt4" ng-hide="vm.word.template =='freeStyle' || vm.word.guanlianciList == '' || vm.word.guanlianciList == undefined">
+        <label class="text-info">【关联词条】</label>
+
+        <div class="col-xs-12">
+            <div class="pull-left mr20" ng-repeat="guanlianci in vm.word.guanlianciList">
+                <a ng-click=""><span ng-bind="guanlianci"></span></a>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="form-group form-group-sm mt4 mb4" ng-hide="vm.word.template =='freeStyle' || vm.word.liju == '' || vm.word.liju == undefined">
+        <label class="text-info">【例句】</label>
+
+        <div class="col-xs-12">
+            <span ng-bind-html="vm.word.liju"></span>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="form-group form-group-sm mt4 mb4" ng-hide="vm.word.template =='freeStyle' || vm.word.bianxing == '' || vm.word.bianxing == undefined">
+        <div data-toggle="collapse" href="#showword_bianxing_{{vm.word.id}}">
+            <label class="text-info">【变形】</label>
+        </div>
+        <div id="showword_bianxing_{{vm.word.id}}" class="panel-collapse collapse">
+            <div class="panel-body">
+                <span ng-bind-html="vm.word.bianxing"></span>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group form-group-sm mt4 mb10" ng-hide="vm.word.template =='freeStyle' || vm.word.baike == '' || vm.word.baike == undefined">
+        <label class="text-info">【百科与参考】</label>
+
+        <div class="col-xs-12">
+            <span ng-bind-html="vm.word.baike"></span>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

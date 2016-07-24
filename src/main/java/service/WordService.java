@@ -152,10 +152,10 @@ public class WordService extends BaseService<Word> {
 		return super.find(Query.query(Criteria.where("dictionary.displayName").is(dictionaryName)));
 	}
 
-	public Word findWordByMultipleParam(String word, Map<String, Object> dictionary, String status) {
+	public Word findWordByMultipleParam(String word, String status) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("word", word);
-		params.put("dictionary", dictionary);
+//		params.put("dictionary", dictionary);
 		params.put("status", status);
 		return (Word) super.findOne(params);
 	}

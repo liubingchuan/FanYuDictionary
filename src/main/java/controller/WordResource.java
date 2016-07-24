@@ -202,10 +202,13 @@ public class WordResource {
 		}
 
 		Word word = this.wordService.findWordById(wordId);
-		Word publishedWord = this.wordService.findWordByMultipleParam(word.getWord(), word.getDictionary(),
+		Word publishedWord = this.wordService.findWordByMultipleParam(word.getWord(),
 				"published");
 		if ((publishedWord != null) && (!"".equals(publishedWord.getId()))) {
-			return Response.status(200).entity("published").type("text/plain").build();
+			// 为dictionary添加的两个字段所作出的额外比较
+			if(word.getDictionary()!=null && publishedWord.getDictionary() != null && word.getDictionary().get("id").equals(publishedWord.getDictionary().get("id"))) {
+				return Response.status(200).entity("published").type("text/plain").build();
+			}
 		}
 
 		word.setAuthor(new HashMap<String, Object>());
@@ -548,7 +551,7 @@ public class WordResource {
 		for (String id : ids) {
 			id = id.replaceAll("\"", "");
 			Word word = this.wordService.findWordById(id);
-			Word publishedWord = this.wordService.findWordByMultipleParam(word.getWord(), word.getDictionary(),
+			Word publishedWord = this.wordService.findWordByMultipleParam(word.getWord(),
 					"published");
 			if ((publishedWord != null) && (!"".equals(publishedWord.getId()))) {
 				return Response.status(409).entity("该词条已被发布，不允许再次发布").type("text/plain").build();

@@ -40,8 +40,8 @@
             }
         }
 
-        function createNewWord(word) {
-            return $http.post(wordURL, word)
+        function createNewWord(word, roleFlag) {
+            return $http.post(wordURL + '/' + roleFlag , word)
                 .then(createNewWordComplete)
                 .catch(createNewWordFailed);
 

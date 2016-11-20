@@ -177,6 +177,7 @@ public class WordResource {
 	}
 
 	@POST
+	@Path("{role}")
 	@Produces({ "application/json" })
 	public Response saveWord(@PathParam("role") String role, String wordJson ) {
 		Word word = (Word) this.wordService.jsonToEntity(wordJson, Word.class);

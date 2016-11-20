@@ -41,7 +41,7 @@
         }
 
         function createNewWord(word, roleFlag) {
-            return $http.post(wordURL + '/' + roleFlag , word)
+            return $http.put(wordURL + '/' + roleFlag , word)
                 .then(createNewWordComplete)
                 .catch(createNewWordFailed);
 

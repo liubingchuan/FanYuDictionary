@@ -185,7 +185,14 @@ function createWord() {
 
             //判断是新建还是更新
             if (vm.word.id === undefined) {
-                WordService.createNewWord(vm.word);
+            	
+            	if ($rootScope.currentUser.role === 'Admin') {
+            		WordService.createNewWord(vm.word, 'Y');
+            	}
+            	else {
+            		WordService.createNewWord(vm.word, 'N');
+            	}
+                
             } else {
                 WordService.updateWord(vm.word).then(success).catch(fail);
             }

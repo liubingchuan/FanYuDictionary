@@ -98,7 +98,7 @@ public class WordService extends BaseService<Word> {
 			else if (period.equals("Year")) {
 				cal.add(1, -Integer.valueOf(pCount).intValue());
 			}
-			return Query.query(Criteria.where("lastEditDateTime").gte(Long.valueOf(cal.getTimeInMillis())))
+			return Query.query(Criteria.where("lastEditDateTime").gte(Long.valueOf(cal.getTimeInMillis())).and("importflag").is(false))
 					.with(new Sort(Sort.Direction.DESC, new String[] { "lastEditDateTime" }));
 		}
 		return null;

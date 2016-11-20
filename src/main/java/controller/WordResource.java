@@ -115,6 +115,7 @@ public class WordResource {
 			if (dictionaries.endsWith("@")) {
 				dictionaries = (String) dictionaries.subSequence(0, dictionaries.length() - 1);
 			}
+			//
 			dictionaries = this.dictionaryService.filtByDicGroup(dictionaries);
 			List<String> list = this.wordService.findByParams(word, match, domain, dictionaries, logon);
 			if ((list != null) && (list.size() != 0)) {
@@ -177,14 +178,18 @@ public class WordResource {
 
 	@POST
 	@Produces({ "application/json" })
-	public Response saveWord(String wordJson) {
+	public Response saveWord(@PathParam("role") String role, String wordJson ) {
 		Word word = (Word) this.wordService.jsonToEntity(wordJson, Word.class);
 		Date date = new Date();
 		String id = UUID.randomUUID().toString();
 		word.setId(id);
+		if (role != null && "Y".equals(role)) {
+			word.setStatus("published");
+		}
 		word.setCreateDateTime(date.getTime());
 		word.setLastEditDateTime(date.getTime());
 		word.setStatus("created");
+		word.setImportflag(false);
 		this.wordService.save(word);
 		LOGGER.info("save the word successfully------------"
 				+ new SimpleDateFormat("yyyy MM dd HH mm ss").format(new Date()));

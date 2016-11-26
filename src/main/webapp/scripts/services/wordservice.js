@@ -149,7 +149,7 @@
 
         function searchWord(search, login) {
 
-            return $http.get(wordURL + "?search=" + search.searchWord + "&match=" + search.match + "&domain=" + search.domain + "&dictionaries=" + search.dictionaries + "&logon=" + login)
+            return $http.get(wordURL + "?search=" + search.searchWord + "&code=" + search.code + "&match=" + search.match + "&domain=" + search.domain + "&dictionaries=" + search.dictionaries + "&logon=" + login)
                 .then(searchWordComplete)
                 .catch(searchWordFailed);
 

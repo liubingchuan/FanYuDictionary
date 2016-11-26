@@ -114,7 +114,7 @@ public class WordService extends BaseService<Word> {
 			}
 		}
 		
-		return output;
+		return output == null ?input:output;
 	}
 	
 	/**
@@ -149,7 +149,9 @@ public class WordService extends BaseService<Word> {
 		map.put("s", "sśṣ");
 		map.put("S", "sśṣ");
 		this.replaceNext(input, map, list);
-		
+		if (list == null || list.size() ==0) {
+			list.add(input);
+		}
 		return list;
 	}
 	

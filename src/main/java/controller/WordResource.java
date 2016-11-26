@@ -67,7 +67,7 @@ public class WordResource {
 	private static final Log LOGGER = LogFactory.getLog(WordResource.class);
 
 	@GET
-	public Response getWords(@QueryParam("search") String word, @QueryParam("match") String match,
+	public Response getWords(@QueryParam("search") String word, @QueryParam("code") String code, @QueryParam("match") String match,
 			@QueryParam("domain") String domain, @QueryParam("dictionaries") String dictionaries,
 			@QueryParam("logon") String logon, @QueryParam("period") String period,
 			@QueryParam("periodCount") String periodCount, @QueryParam("userId") String userId,
@@ -85,6 +85,10 @@ public class WordResource {
 				return Response.status(412).entity("HTTP HEADER 中的page 和 pageSize 必须大于0").type("text/plain").build();
 		} else {
 			if ((match == null) || ("".equals(match))) {
+				return Response.status(412).entity("match 参数不允许为空").type("text/plain").build();
+			}
+			
+			if ((code == null) || ("".equals(code))) {
 				return Response.status(412).entity("match 参数不允许为空").type("text/plain").build();
 			}
 
@@ -117,7 +121,24 @@ public class WordResource {
 			}
 			//
 			dictionaries = this.dictionaryService.filtByDicGroup(dictionaries);
-			List<String> list = this.wordService.findByParams(word, match, domain, dictionaries, logon);
+			
+			
+			
+			// 根据code 选择 HK 模糊 unicode编码方式
+			List<String> list = new ArrayList<String>();
+			if("mohu".equals(code)) {
+				List<String> wordList = this.wordService.replaceByVague(word);
+				for(String s: wordList) {
+					list.addAll(this.wordService.findByParams(s, match, domain, dictionaries, logon));
+				}
+			} else if("Unicode".equals(code)) {
+				list = this.wordService.findByParams(word, match, domain, dictionaries, logon);
+			} else if("HK".equals(code)) {
+				word = this.wordService.replaceByHK(word);
+				list = this.wordService.findByParams(word, match, domain, dictionaries, logon);
+			} 
+			
+			
 			if ((list != null) && (list.size() != 0)) {
 				String[] dictionaryArray = dictionaries.split("@");
 				String dicGroup = "";

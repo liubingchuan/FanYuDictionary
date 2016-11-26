@@ -1,11 +1,13 @@
 package service;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -70,6 +72,116 @@ public class WordService extends BaseService<Word> {
 		}
 
 		return null;
+	}
+	
+	/**
+	 * 根据HK映射表进行替换，大小写敏感
+	 * 按照最长子串进行匹配
+	 * 
+	 */
+	public String replaceByHK(String input) {
+		
+		Map<String, String> normalMap = new HashMap<String, String> ();
+		String output = null;
+		normalMap.put("A", "ā");
+		normalMap.put("I", "ī");
+		normalMap.put("U", "ū");
+		normalMap.put("R", "ṛ");
+		normalMap.put("lR", "ḷ");
+		normalMap.put("M", "ṃ");
+		normalMap.put("H", "ḥ");
+		normalMap.put("G", "ṅ");
+		normalMap.put("J", "ñ");
+		normalMap.put("T", "ṭ");
+		normalMap.put("D", "ḍ");
+		normalMap.put("N", "ṇ");
+		normalMap.put("z", "ś");
+		normalMap.put("S", "ṣ");
+		
+		Map<String, String> specialMap = new HashMap<String, String> ();
+		specialMap.put("RR", "ṝ");
+		specialMap.put("lRR", "ḹ");
+		
+		for(Entry<String, String> entry : specialMap.entrySet()) {
+			if (input.contains(entry.getKey())) {
+				output = input.replace(entry.getKey(), entry.getValue());
+			}
+		}
+		
+		for(Entry<String, String> entry : normalMap.entrySet()) {
+			if (input.contains(entry.getKey())) {
+				output = input.replace(entry.getKey(), entry.getValue());
+			}
+		}
+		
+		return output;
+	}
+	
+	/**
+	 * 根据模糊映射表进行替换，大小写不敏感
+	 * 
+	 */
+	public List<String> replaceByVague(String input) {
+		
+		
+		// 创建一个Map<String, String> 的结构存储映射关系
+		Map<String, String> map = new HashMap<String, String>();
+		List<String> list = new ArrayList<String>();
+		
+		map.put("a", "aā");
+		map.put("A", "aā");
+		map.put("i", "iī");
+		map.put("I", "iī");
+		map.put("u", "uū");
+		map.put("U", "uū");
+		map.put("l", "lḷḹ");
+		map.put("L", "lḷḹ");
+		map.put("m", "mṃ");
+		map.put("M", "mṃ");
+		map.put("h", "hḥ");
+		map.put("H", "hḥ");
+		map.put("n", "nṇṅñ");
+		map.put("N", "nṇṅñ");
+		map.put("t", "tṭ");
+		map.put("T", "tṭ");
+		map.put("d", "dḍ");
+		map.put("D", "dḍ");
+		map.put("s", "sśṣ");
+		map.put("S", "sśṣ");
+		this.replaceNext(input, map, list);
+		
+		return list;
+	}
+	
+	private void replaceNext(String input, Map<String, String> map, List<String> list) {
+		this.replaceNext(input, map, null, list);
+	}
+	
+	
+	private void replaceNext(String input, Map<String, String> map, String prefix, List<String> list) {
+		String currentChar = String.valueOf(input.charAt(0));
+		if (prefix == null) {
+			prefix = "";
+		} 
+		if(map.containsKey(currentChar)){
+			char[] cr = map.get(currentChar).toCharArray();
+			for(int i=0; i<cr.length;i++) {
+				
+				String nextLayerPrefix = prefix + String.valueOf(cr[i]);
+				if(input.length()>1) {
+					replaceNext(input.substring(1, input.length()), map, nextLayerPrefix, list);
+				}else {
+					list.add(nextLayerPrefix);
+				} 
+			}
+		}else {
+			prefix += currentChar;
+			if (input.length() == 1) {
+				list.add(prefix);
+				return;
+			}
+			replaceNext(input.substring(1, input.length()), map, prefix, list);
+		}
 	}
 
 	public Pagination<Word> findByDate(String period, String pCount, int page, int pageSize) {

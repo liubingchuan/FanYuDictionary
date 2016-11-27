@@ -12,12 +12,27 @@
     function showWord() {
         var showWordDirectiveController = showWordDirectiveController;
 
-        showWordDirectiveController.$inject = ['$scope', '$sce'];
+        showWordDirectiveController.$inject = ['$scope', '$rootScope', '$sce'];
 
-        function showWordDirectiveController($scope, $sce) {
+        function showWordDirectiveController($scope, $rootScope, $sce) {
             var vm = this;
             vm.word = $scope.word;
+            vm.changeIcon = changeIcon;
+            vm.changeIconBC = changeIconBC;
+            vm.isBottomIcon = false;
+            vm.isBottomIconBC = false;
+            
+            
+            function changeIcon () {
+                vm.isBottomIcon = !vm.isBottomIcon;
+            }
+            
+            function changeIconBC () {
+                vm.isBottomIconBC = !vm.isBottomIconBC;
+            }        
+            
         }
+        
 
         return {
             templateUrl: 'scripts/directives/templates/showWord.html',

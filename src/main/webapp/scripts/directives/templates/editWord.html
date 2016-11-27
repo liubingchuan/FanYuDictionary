@@ -40,28 +40,28 @@
                 <li role="presentation" class="dropdown-header" style="color:#337AB7;margin-top:10px;"  ng-hide="createVM.fan_dictionaryList.length==0">梵</li>
                 <li role="presentation" class="divider" style="margin-top: 0"  ng-hide="createVM.fan_dictionaryList.length==0"></li>
                 <li role="presentation" ng-repeat="dictionary in createVM.fan_dictionaryList">
-                    <a ng-click="createVM.setDictionary(dictionary)">{{dictionary.displayName}}</a>
+                    <a ng-click="createVM.setDictionary(dictionary)">&#8226&nbsp{{dictionary.displayName}}</a>
                 </li>
                 <li role="presentation" class="dropdown-header"  ng-hide="createVM.fan_dictionaryList.length==0"></li>
 
                 <li role="presentation" class="dropdown-header" style="color:#337AB7;margin-top:10px;"  ng-hide="createVM.ba_dictionaryList.length==0">巴</li>
                 <li role="presentation" class="divider" style="margin-top: 0" ng-hide="createVM.ba_dictionaryList.length==0"></li>
                 <li role="presentation" ng-repeat="dictionary in createVM.ba_dictionaryList">
-                    <a ng-click="createVM.setDictionary(dictionary)">{{dictionary.displayName}}</a>
+                    <a ng-click="createVM.setDictionary(dictionary)">&#8226&nbsp{{dictionary.displayName}}</a>
                 </li>
                 <li role="presentation" class="dropdown-header" ng-hide="createVM.ba_dictionaryList.length==0"></li>
 
                 <li role="presentation" class="dropdown-header" style="color:#337AB7;margin-top:10px;" ng-hide="createVM.zang_dictionaryList.length==0">藏</li>
                 <li role="presentation" class="divider" style="margin-top: 0"  ng-hide="createVM.zang_dictionaryList.length==0"></li>
                 <li role="presentation" ng-repeat="dictionary in createVM.zang_dictionaryList">
-                    <a ng-click="createVM.setDictionary(dictionary)">{{dictionary.displayName}}</a>
+                    <a ng-click="createVM.setDictionary(dictionary)">&#8226&nbsp{{dictionary.displayName}}</a>
                 </li>
                 <li role="presentation" class="dropdown-header"  ng-hide="createVM.zang_dictionaryList.length==0"></li>
 
                 <li role="presentation" class="dropdown-header" style="color:#337AB7;margin-top:10px;" ng-hide="createVM.han_dictionaryList.length==0">汉</li>
                 <li role="presentation" class="divider" style="margin-top: 0" ng-hide="createVM.han_dictionaryList.length==0"></li>
                 <li role="presentation" ng-repeat="dictionary in createVM.han_dictionaryList">
-                    <a ng-click="createVM.setDictionary(dictionary)">{{dictionary.displayName}}</a>
+                    <a ng-click="createVM.setDictionary(dictionary)">&#8226&nbsp{{dictionary.displayName}}</a>
                 </li>
                 <li role="presentation" class="dropdown-header" ng-hide="createVM.han_dictionaryList.length==0"></li>
             </ul>

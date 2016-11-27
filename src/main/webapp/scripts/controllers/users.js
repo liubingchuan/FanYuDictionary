@@ -227,6 +227,8 @@
           alert('昵称不能为空');
         } else if (vm.user.role == null || vm.user.role == '') {
           alert('必须选择用户角色');
+        } else if (vm.allowedDictionariesInPanel === null || vm.allowedDictionariesInPanel === [] || vm.allowedDictionariesInPanel === '') {
+            alert('必须为用户分配可编辑词典');
         } else {
           UserService.searchUser(vm.user.username).then(function (data) {
             if (data != 'error') {
@@ -325,6 +327,8 @@
           if (vm.allowedDictionariesInPanel == null || vm.allowedDictionariesInPanel == []) {
             alert('必须为用户分配可编辑词典');
           }*/
+        } else if (vm.allowedDictionariesInPanel == null || vm.allowedDictionariesInPanel == []) {
+            alert('必须为用户分配可编辑词典');
         } else {
 
           pushUserAllowedDictionaries();

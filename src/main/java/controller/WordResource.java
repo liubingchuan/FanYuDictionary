@@ -182,20 +182,23 @@ public class WordResource {
 							// 如果当前词条已经被发布，则直接将当前词条名字放入缓存列表
 							if ("published".equals(wd.getStatus())) {
 								publishedWordNameList.add(wd.getWord());
+								wd.setStatus2("published");
 							} else {
 								// 如果当前词条的状态为未发布，则先查询当前的缓存列表
 								// 如果缓存列表中不存在该词条名称，则查询数据库
 								if(!publishedWordNameList.contains(wd.getWord())) {
 									Word publishedWord = this.wordService.findWordByMultipleParam(wd.getWord(),
 											"published");
-									// 如果数据库中已经存在一条已发布的词条，则将该词条名称加入缓存列表，同时将该词条的状态置为published，否则什么都不做，直接判断下一个词条
+									// 如果数据库中已经存在一条已发布的词条，则将该词条名称加入缓存列表，同时将该词条的状态置为published，否则将状态置为unpublished
 									if(publishedWord != null && publishedWord.getId() != null) {
 										publishedWordNameList.add(wd.getWord());
-										wd.setStatus("published");
+										wd.setStatus2("published");
+									} else {
+										wd.setStatus2("unpublished");
 									}
 								}else {
 									// 缓存列表中存在该词条名称，则直接将其状态置为published
-									wd.setStatus("published");
+									wd.setStatus2("published");
 								}
 							}
 						}
@@ -225,6 +228,7 @@ public class WordResource {
 				// 如果当前词条已经被发布，则直接将当前词条名字放入缓存列表
 				if ("published".equals(wd.getStatus())) {
 					publishedWordNameList.add(wd.getWord());
+					wd.setStatus2("published");
 				} else {
 					// 如果当前词条的状态为未发布，则先查询当前的缓存列表
 					// 如果缓存列表中不存在该词条名称，则查询数据库
@@ -234,11 +238,14 @@ public class WordResource {
 						// 如果数据库中已经存在一条已发布的词条，则将该词条名称加入缓存列表，同时将该词条的状态置为published，否则什么都不做，直接判断下一个词条
 						if(publishedWord != null && publishedWord.getId() != null) {
 							publishedWordNameList.add(wd.getWord());
-							wd.setStatus("published");
+							wd.setStatus2("published");
+						} else {
+							wd.setStatus2("unpublished");
 						}
+						
 					}else {
 						// 缓存列表中存在该词条名称，则直接将其状态置为published
-						wd.setStatus("published");
+						wd.setStatus2("published");
 					}
 				}
 			}

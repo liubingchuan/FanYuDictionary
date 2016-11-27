@@ -207,10 +207,11 @@ public class WordResource {
 		word.setId(id);
 		if (role != null && "Y".equals(role)) {
 			word.setStatus("published");
+		} else {
+			word.setStatus("created");
 		}
 		word.setCreateDateTime(date.getTime());
 		word.setLastEditDateTime(date.getTime());
-		word.setStatus("created");
 		word.setImportflag(false);
 		this.wordService.save(word);
 		LOGGER.info("save the word successfully------------"

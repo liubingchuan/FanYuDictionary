@@ -164,6 +164,7 @@ public class WordResource {
 
 		int pageCount = 0;
 
+		// 最新词条查询部分
 		if ((period != null) && (!"".equals(period)) && (periodCount != null) && (!"".equals(periodCount))) {
 			pagination = new Pagination<Word>(0, Integer.valueOf(pageSize).intValue(),
 					this.wordService.queryCount(period, periodCount));
@@ -172,13 +173,44 @@ public class WordResource {
 					Integer.valueOf(pageSize).intValue());
 			LOGGER.info("return new words list in getWords-------"
 					+ new SimpleDateFormat("yyyy MM dd HH mm ss").format(new Date()));
+			
+			// 遍历相同词条，若一个词条为published，则全部都为published
+						List<Word> words = pagination.getDatas();
+						// 作为一个当前页已发布词条的缓存
+						List<String> publishedWordNameList = new ArrayList<String>();
+						for(Word wd: words) {
+							// 如果当前词条已经被发布，则直接将当前词条名字放入缓存列表
+							if ("published".equals(wd.getStatus())) {
+								publishedWordNameList.add(wd.getWord());
+								wd.setStatus2("published");
+							} else {
+								// 如果当前词条的状态为未发布，则先查询当前的缓存列表
+								// 如果缓存列表中不存在该词条名称，则查询数据库
+								if(!publishedWordNameList.contains(wd.getWord())) {
+									Word publishedWord = this.wordService.findWordByMultipleParam(wd.getWord(),
+											"published");
+									// 如果数据库中已经存在一条已发布的词条，则将该词条名称加入缓存列表，同时将该词条的状态置为published，否则将状态置为unpublished
+									if(publishedWord != null && publishedWord.getId() != null) {
+										publishedWordNameList.add(wd.getWord());
+										wd.setStatus2("published");
+									} else {
+										wd.setStatus2("unpublished");
+									}
+								}else {
+									// 缓存列表中存在该词条名称，则直接将其状态置为published
+									wd.setStatus2("published");
+								}
+							}
+						}
 			return Response.status(200).header("Access-Control-Expose-Headers", "pageCount")
 					.header("pageCount", Integer.valueOf(pageCount)).header("Access-Control-Expose-Headers", "page")
 					.header("page", page).header("Access-Control-Expose-Headers", "pageSize")
-					.header("pageSize", pageSize).entity(this.wordService.listToJson(pagination.getDatas()))
+					.header("pageSize", pageSize).entity(this.wordService.listToJson(words))
 					.type("application/json").build();
 		}
 
+		
+		// 我的词条查询部分
 		if ((userId != null) && (!"".equals(userId))) {
 			pagination = new Pagination<Word>(0, Integer.valueOf(pageSize).intValue(),
 					this.wordService.queryCount(userId));
@@ -187,10 +219,40 @@ public class WordResource {
 					Integer.valueOf(pageSize).intValue());
 			LOGGER.info("return word list by userid in getWords---------"
 					+ new SimpleDateFormat("yyyy MM dd HH mm ss").format(new Date()));
+			
+			// 遍历相同词条，若一个词条为published，则全部都为published
+			List<Word> words = pagination.getDatas();
+			// 作为一个当前页已发布词条的缓存
+			List<String> publishedWordNameList = new ArrayList<String>();
+			for(Word wd: words) {
+				// 如果当前词条已经被发布，则直接将当前词条名字放入缓存列表
+				if ("published".equals(wd.getStatus())) {
+					publishedWordNameList.add(wd.getWord());
+					wd.setStatus2("published");
+				} else {
+					// 如果当前词条的状态为未发布，则先查询当前的缓存列表
+					// 如果缓存列表中不存在该词条名称，则查询数据库
+					if(!publishedWordNameList.contains(wd.getWord())) {
+						Word publishedWord = this.wordService.findWordByMultipleParam(wd.getWord(),
+								"published");
+						// 如果数据库中已经存在一条已发布的词条，则将该词条名称加入缓存列表，同时将该词条的状态置为published，否则什么都不做，直接判断下一个词条
+						if(publishedWord != null && publishedWord.getId() != null) {
+							publishedWordNameList.add(wd.getWord());
+							wd.setStatus2("published");
+						} else {
+							wd.setStatus2("unpublished");
+						}
+						
+					}else {
+						// 缓存列表中存在该词条名称，则直接将其状态置为published
+						wd.setStatus2("published");
+					}
+				}
+			}
 			return Response.status(200).header("Access-Control-Expose-Headers", "pageCount")
 					.header("pageCount", Integer.valueOf(pageCount)).header("Access-Control-Expose-Headers", "page")
 					.header("Access-Control-Expose-Headers", "pageSize").header("page", page)
-					.header("pageSize", pageSize).entity(this.wordService.listToJson(pagination.getDatas()))
+					.header("pageSize", pageSize).entity(this.wordService.listToJson(words))
 					.type("application/json").build();
 		}
 

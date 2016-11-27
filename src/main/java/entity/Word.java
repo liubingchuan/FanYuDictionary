@@ -49,6 +49,18 @@ public class Word extends Entity {
 
 	@Expose
 	private String status;
+	
+	// 用来控制发布按钮的显示
+	@Expose
+	private String status2;
+
+	public String getStatus2() {
+		return status2;
+	}
+
+	public void setStatus2(String status2) {
+		this.status2 = status2;
+	}
 
 	@Expose
 	private boolean importflag;

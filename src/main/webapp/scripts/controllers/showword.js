@@ -45,7 +45,6 @@
                        }*/
                       vm.wordDetail = data;
                     });
-                    alert('get wan cheng---------------------');
                 }
 
             }

@@ -31,6 +31,7 @@
         vm.publishAll = publishAll;
         vm.deleteAll = deleteAll;
         vm.selectAll = selectAll;
+        
         vm.sorting = sorting;
         vm.selectAllFalg = false;
         vm.orderBy = 'date';
@@ -83,7 +84,7 @@
                 }
             });
         }
-
+       
         function publishWordConfirm(wordId) {
           vm.wordId = wordId;
           vm.isPublishAll = false;
@@ -98,7 +99,8 @@
                 else if (data === 'published') {
                 	alert('词条已经发布');
                 	$('#pubulishNewWordConfirmModal').modal('hide');
-                    getWordDetail(vm.word);
+                    //getWordDetail(vm.word);
+                	refreshMyWordList();
                 }
             });
         }

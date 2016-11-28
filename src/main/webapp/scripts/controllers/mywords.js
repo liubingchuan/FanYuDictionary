@@ -111,7 +111,8 @@
             else if (data === 'published') {
             	alert('词条已经发布');
             	$('#pubulishMyWordConfirmModal').modal('hide');
-                getWordDetail(vm.word);
+                //getWordDetail(vm.word);
+            	refreshMyWordList();
             }
           });
         }

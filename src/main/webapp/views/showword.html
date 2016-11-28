@@ -8,7 +8,7 @@
             <div class="panel-heading">
                 <span ng-bind="word.status=='published'?word.dictionary.displayName:word.author.displayName"></span>
                 <div class="text-primary pull-right">
-                    <button has-permission="Admin" class="btn btn-success btn-xs hide" data-toggle="modal"
+                    <button has-permission="Admin" ng-hide="word.status2=='published'" class="btn btn-success btn-xs hide" data-toggle="modal"
                             data-target="#pubulishWordConfirmModal"
                             ng-click="showWordVM.publishWordConfirm(word.id)"><span
                             class="glyphicon glyphicon-upload">发布</span></button>

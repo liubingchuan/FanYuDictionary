@@ -45,6 +45,7 @@
                        }*/
                       vm.wordDetail = data;
                     });
+                    alert('get wan cheng---------------------');
                 }
 
             }
@@ -59,7 +60,8 @@
                 WordService.deleteWord(vm.wordId).then(function(data){
                     if (data === 'success') {
                         $('#deleteWordConfirmModal').modal('hide');
-                        getWordDetail(vm.word);
+                        //getWordDetail(vm.word);
+                        getWordDetail();
                     }
                 });
             }
@@ -73,12 +75,14 @@
                 WordService.publishWord(vm.wordId).then(function(data){
                     if (data === 'success') {
                         $('#pubulishWordConfirmModal').modal('hide');
-                        getWordDetail(vm.word);
+                        //getWordDetail(vm.word);
+                        getWordDetail();
                     }
                     else if (data === 'published') {
                     	alert('词条已经发布');
                     	$('#pubulishWordConfirmModal').modal('hide');
-                        getWordDetail(vm.word);
+                        //getWordDetail(vm.word);
+                    	getWordDetail();
                     }
                 });
             }

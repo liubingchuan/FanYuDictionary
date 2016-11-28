@@ -73,7 +73,7 @@
                       <span ng-hide="word.isEdit" class="glyphicon glyphicon-edit">编辑</span>
                       <span ng-hide="!word.isEdit" class="glyphicon glyphicon-remove-circle">取消</span>
                     </button>
-                    <button has-permission="Admin" ng-hide="word.status=='published'"
+                    <button has-permission="Admin" ng-hide="word.status2=='published'"
                             class="btn btn-success btn-xs ml2 pull-right" data-toggle="modal"
                             data-target="#pubulishMyWordConfirmModal" ng-click="vm.publishWordConfirm(word.id)"><span
                             class="glyphicon glyphicon-upload">发布</span></button>

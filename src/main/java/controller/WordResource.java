@@ -346,11 +346,11 @@ public class WordResource {
 		}
 		if (published == true) {
 			for(Word word: list) {
-				word.setStatus2("published");
+				word.setStatus("published");
 			}
 		}else {
 			for(Word word: list) {
-				word.setStatus2("unpublished");
+				word.setStatus("unpublished");
 			}
 		}
 

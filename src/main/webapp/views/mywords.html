@@ -19,7 +19,7 @@
       <!--<span class="glyphicon glyphicon-triangle-bottom"ng-show="vm.order.word == 'desc'"></span>
       <span class="glyphicon glyphicon-triangle-top" ng-show="vm.order.word == 'asc'"></span>-->
     </th>
-    <th class="col-xs-3" style="padding-left: 15px; border: 0" ng-click="vm.sorting('date')">更新时间
+    <th class="col-xs-2" style="padding-left: 15px; border: 0" ng-click="vm.sorting('date')">更新时间
       <!--<span class="glyphicon glyphicon-triangle-bottom" ng-show="vm.order.date == 'desc'"></span>
       <span class="glyphicon glyphicon-triangle-top" ng-show="vm.order.date == 'asc'"></span>-->
     </th>
@@ -28,6 +28,10 @@
       <span class="glyphicon glyphicon-triangle-top" ng-show="vm.order.status == 'asc'"></span>-->
     </th>
     <th class="col-xs-2" style="padding-left: 15px; border: 0" ng-click="vm.sorting('author')">作者
+      <!--<span class="glyphicon glyphicon-triangle-bottom" ng-show="vm.order.author == 'desc'"></span>
+      <span class="glyphicon glyphicon-triangle-top" ng-show="vm.order.author == 'asc'"></span>-->
+    </th>
+    <th class="col-xs-1" style="padding-left: 15px; border: 0">词典归属
       <!--<span class="glyphicon glyphicon-triangle-bottom" ng-show="vm.order.author == 'desc'"></span>
       <span class="glyphicon glyphicon-triangle-top" ng-show="vm.order.author == 'asc'"></span>-->
     </th>
@@ -50,7 +54,7 @@
                     <span data-toggle="collapse" data-parent="#accordion"
                           href="#collapse{{word.id}}" style="cursor: pointer;">{{word.word}}</span>
                 </div>
-                <div class="text-primary col-xs-3" data-toggle="collapse" data-parent="#accordion"
+                <div class="text-primary col-xs-2" data-toggle="collapse" data-parent="#accordion"
                      href="#collapse{{word.id}}" aria-expanded="true" style="cursor: pointer;">{{word.lastEditDateTime |
                     date : 'yyyy-MM-dd hh:mm:ss'}}
                 </div>
@@ -61,6 +65,9 @@
                 <div class="text-primary col-xs-2" data-toggle="collapse" data-parent="#accordion"
                      href="#collapse{{word.id}}" aria-expanded="true">
                     <span class="glyphicon glyphicon-user"></span> {{word.author.displayName}}
+                </div>
+                <div class="text-primary col-xs-1" data-toggle="collapse" data-parent="#accordion"
+                     href="#collapse{{word.id}}" aria-expanded="true" style="cursor: pointer;">{{word.dictionary.shortName}}
                 </div>
                 <div class="text-primary col-xs-2">
                     <button has-permission="Admin Editor" is-editable="{{word}}"

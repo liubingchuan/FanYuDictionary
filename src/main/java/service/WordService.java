@@ -105,12 +105,14 @@ public class WordService extends BaseService<Word> {
 		for(Entry<String, String> entry : specialMap.entrySet()) {
 			if (input.contains(entry.getKey())) {
 				output = input.replace(entry.getKey(), entry.getValue());
+				input = output;
 			}
 		}
 		
 		for(Entry<String, String> entry : normalMap.entrySet()) {
 			if (input.contains(entry.getKey())) {
 				output = input.replace(entry.getKey(), entry.getValue());
+				input = output;
 			}
 		}
 		

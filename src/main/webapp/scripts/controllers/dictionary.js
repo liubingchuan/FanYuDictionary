@@ -119,6 +119,7 @@
         }
 
         function searchWord() {
+        	vm.search.dictionaries = "";
             //设置当前用户查询那些字典（在header里面选中的那些字典）。
             if( $rootScope.currentUser.dicSequence != undefined){
                 for(var i in $rootScope.currentUser.dicSequence.checkList) {

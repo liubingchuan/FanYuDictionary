@@ -156,9 +156,15 @@ body {
 }
 
 .navbar-inverse {
-    background-color: #337AB7;/*#444444*//*#337AB7*/;
+    background-color: #000000; /*#337AB7;/*#444444*//*#337AB7*/;
     border-color: #337AB7;/*#444444*/;/*#337AB7*/;
     box-shadow: 0 0 20px #aaa;
+}
+
+.con {
+	background-color:#4682B4;
+	border-color: #337AB7;
+	
 }
 
 .navbar-inverse .navbar-brand {

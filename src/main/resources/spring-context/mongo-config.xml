@@ -7,28 +7,8 @@
             http://www.springframework.org/schema/data/mongo  
             http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">
 	 <!-- <mongo:mongo host="localhost" port="27017"/> -->  
-	 <!-- <mongo:mongo host="10.44.138.1" port="27017"/> --> 
-	 <mongo:mongo host="101.200.188.130" port="27017"/> 
-	 <!-- <mongo:mongo host="101.200.188.130" port="27017">
-        <mongo:options connections-per-host="100" threads-allowed-to-block-for-connection-multiplier="50" connect-timeout="1000" max-wait-time="2500"
-                       auto-connect-retry="true" socket-keep-alive="true" socket-timeout="15000" slave-ok="true" />
-    </mongo:mongo> -->
 	 
-	 <!-- <mongo:mongo-client host="101.200.188.130" port="27017" credentials="test2:password@test">
-		<mongo:client-options write-concern="NORMAL" />
-	</mongo:mongo-client> --> 
-    
-    <!-- <bean id="userCredentials" class="org.springframework.data.authentication.UserCredentials">  
-        <constructor-arg name="username"  value="test2"/>  
-        <constructor-arg name="password"  value="password"/>  
-    </bean> -->
-    
-    <!-- <mongo:mongo-client credentials="test2:password@101.200.188.130:27017/test" /> -->
-       
-    <!-- Offers convenience methods and automatic mapping between MongoDB JSON documents and your domain classes. -->  
-    <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">  
-            <constructor-arg ref="mongo"/>  
-            <constructor-arg name="databaseName" value="test"/>
-            <!-- <constructor-arg ref="userCredentials" /> -->  
-    </bean>  
+	<mongo:mongo-client id="mongoClient" host="101.200.188.130" port="27017" credentials="fanfoyan:12345678@fanfo"/> 
+	<mongo:db-factory id="mongoDbFactory" dbname="fanfo" mongo-ref="mongoClient"/>
+    <mongo:template id="mongoTemplate" db-factory-ref="mongoDbFactory" write-concern="NORMAL"/>
 </beans>  

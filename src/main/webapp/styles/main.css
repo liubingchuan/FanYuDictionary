@@ -162,9 +162,12 @@ body {
 }
 
 .con {
-	background-color:#4682B4;
+	background-color:#284F83;
 	border-color: #337AB7;
-	
+}
+
+.left {
+	background-color:#F1F1F1;
 }
 
 .navbar-inverse .navbar-brand {

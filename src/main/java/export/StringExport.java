@@ -8,7 +8,7 @@ public class StringExport extends AbstractExport {
 	public InputStream doExport(String inputStr) {
 		InputStream answer = null;
 		try {
-			answer = new ByteArrayInputStream(inputStr.getBytes("UTF-8"));
+			answer = new ByteArrayInputStream(inputStr.getBytes("Unicode"));
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}

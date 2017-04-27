@@ -27,6 +27,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.shiro.authz.UnauthorizedException;
@@ -606,6 +607,7 @@ public class WordResource {
 
 			List<Word> list = this.wordService.findWordsByDictionaryName(dictionaryName);
 			String json = this.wordService.listToJsonPretty(list, keys);
+			json = StringEscapeUtils.unescapeHtml(json);
 			inmap.put(config.getString("name").trim() + ".json", exportInputStream(json));
 		} catch (Exception e) {
 			e.printStackTrace();

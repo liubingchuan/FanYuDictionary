@@ -111,11 +111,11 @@ function createWord() {
         vm.softKeys = ["ā", "ī", "ū", "ṛ", "ṝ", "ḷ", "ḹ", "ṃ", "ḥ", "ṅ", "ñ", "ṭ", "ḍ", "ṇ", "ś", "ṣ"];
 
         vm.duiyingciOptionList = [
-            "<梵>", "<巴>", "<犍>", "<藏>", "<于>", "<蒙>", "<夏>", "<古>", "<现>", "<英>", "<法>", "<德>", "<日>"
+            "〈梵〉", "〈巴〉", "〈犍〉", "〈混〉", "〈半摩〉", "〈藏〉", "〈于阗〉", "〈吐火〉", "〈回鹘〉", "〈粟特〉", "〈满〉", "〈蒙〉", "〈西夏〉", "〈古汉〉", "〈现汉〉", "〈英〉", "〈法〉", "〈德〉", "〈希腊〉", "〈拉丁〉", "〈日〉", "〈泰〉", "〈缅〉", "〈僧〉"
         ];
 
-        vm.shiyiShortcutButtons = ['[阳]', '[中]', '[阴]', '[形]', '[不变]', '[动]', '[使]', '[被]', '[过分]', '[现分]', '[必分]', '(古)', '(音)', '(佛)',
-            '(语)', '(数)', '(乐)', '(哲)', '(诗)', '(数论)', '<玄>', '<真>', '<义>', '<什>', '<护>', '<安>', '<谦>', '<谶>', '<混>', '<藏>'];
+        vm.shiyiShortcutButtons = ['［阳］', '［中］', '［阴］', '［形］', '［代］', '［动］', '［使］', '［被］', '［过分］', '［现分］', '［必分］', '［独］', '［不定］', '［不变］', '〔古〕', '〔音〕', '〔佛〕',
+            '〔哲〕', '〔语〕', '〔诗〕', '〔数〕', '〔乐〕', '〈藏〉', '‹谶›', '‹安›', '‹谦›', '‹护›', '‹什›', '‹真›', '‹玄›', '‹义›', '①', '②', '③', '④', '⑤', '⑥', '⑦', '❶', '❷', '❸', '❹', '❺', '❻', '❼', '❽', '❾', '❿', '←', '←'];
 
         function addDuiyingci() {
             var newDuiyingci = {
@@ -131,9 +131,33 @@ function createWord() {
                     return;
                 }
             }
-            vm.word.duiyingciList.push(newDuiyingci);
+//            vm.word.duiyingciList.push(newDuiyingci);
+            
+           if (vm.word.duiyingciList.length === 0) {
+        	   vm.word.duiyingciList.push(newDuiyingci);
+       		   return;
+           }
+           
+           var m = 0;
+       	   var ok = true;
+       	   for (var i=0;i<vm.word.duiyingciList.length;i++) {
+       		   var x = vm.duiyingciOptionList.indexOf(newDuiyingci.name);
+       		   var y = vm.duiyingciOptionList.indexOf(vm.word.duiyingciList[i].name);
+       		   console.log(vm.word.duiyingciList[i].name);
+       		   if(x < y) {
+       		   	   m = i;
+       		   	   vm.word.duiyingciList.splice(m,0,newDuiyingci);
+       			   ok = false;
+       			   break;
+       		   }
+       	   }
+       	   if(ok) {
+       		   vm.word.duiyingciList.push(newDuiyingci)
+       	   }
+       	   
+       	   console.log(vm.word.duiyingciList)
         }
-
+        
         function removeDuiyingci(duiyingciName) {
             for (var i in vm.word.duiyingciList) {
                 if (duiyingciName == vm.word.duiyingciList[i].name) {

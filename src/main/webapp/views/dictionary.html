@@ -1,20 +1,30 @@
 <div>
     <nav class="left col-lg-2 sidebar" id="leftNavbar">
         <form>
-            <div class="input-group input-group-sm">
-                <input type="text" id="searchInput" class="form-control" data-toggle="collapse" href="#collapseSoftKeys" 
+            <div class="input-group input-group-sm col-sm-12">
+                <input type="text"  id="searchInput" class="form-control" data-toggle="collapse" href="#collapseSoftKeys" 
                        ng-model="dicVM.search.searchWord"  onclick="$('#collapseSearchSettings').collapse('hide');">
 
-                <div class="input-group-btn">
+                <!-- <div class="input-group-btn">
                     <button type="submit" class="btn btn-default" ng-click="dicVM.searchWord()"><span
                             class="glyphicon glyphicon-search"></span></button>
                     <button type="button" class="btn btn-default" data-toggle="collapse" href="#collapseSearchSettings" onclick=" $('#collapseSoftKeys').collapse('hide');">
                         <span class="caret"></span></button>
-                </div>
+                </div> -->
                 <!-- /btn-group -->
+                
             </div>
             <!--<div>{{dicVM.search.code}}/{{dicVM.search.match}}/{{dicVM.search.domain}}</label></div>-->
-            <div>{{dicVM.search.code | mapCode}}/{{dicVM.search.match | mapMatch}}/{{dicVM.search.domain | mapDomain}}</label></div>
+            <div class="input-group input-group-sm">
+            	<div class="col-xs-8">{{dicVM.search.code | mapCode}}/{{dicVM.search.match | mapMatch}}/{{dicVM.search.domain | mapDomain}}</div>
+            	<div class="input-group-btn">
+                    <button type="submit" class="btn btn-default" ng-click="dicVM.searchWord()"><span
+                            class="glyphicon glyphicon-search"></span></button>
+                    <button type="button" class="btn btn-default" data-toggle="collapse" href="#collapseSearchSettings" onclick=" $('#collapseSoftKeys').collapse('hide');">
+                        <span class="glyphicon glyphicon-cog"></span></button>
+                </div>
+            </div>
+            
         </form>
         <!-- /input-group -->
         <div class="collapse" id="collapseSoftKeys" ng-hide="dicVM.search.code == 'HK'">

@@ -69,12 +69,12 @@
                 <div class="text-primary col-xs-1" data-toggle="collapse" data-parent="#accordion"
                      href="#collapse{{word.id}}" aria-expanded="true" style="cursor: pointer;">{{word.dictionary.shortName}}
                 </div>
-                <div class="text-primary col-xs-2">
-                    <button has-permission="Admin Editor" is-editable="{{word}}"
+                <div class="text-primary col-xs-2" >
+                    <button has-permission="Admin Editor" is-editable="{{word}}" ng-hide="word.importflag"
                             class="btn btn-danger btn-xs ml2 pull-right" data-toggle="modal"
                             data-target="#deleteMyWordConfirmModal" ng-click="vm.deleteWordConfirm(word.id)"><span
-                            class="glyphicon glyphicon-remove">删除</span></button>
-                    <button has-permission="Admin Editor" is-editable="{{word}}"
+                            class="glyphicon glyphicon-remove" ng-hide="vm.importflag" >删除</span></button>
+                    <button has-permission="Admin Editor" is-editable="{{word}}" ng-hide="word.importflag"
                             class="btn btn-warning btn-xs ml2 pull-right" ng-init="word.isEdit=false"
                             ng-click="word.isEdit = !word.isEdit">
                       <span ng-hide="word.isEdit" class="glyphicon glyphicon-edit">编辑</span>

@@ -14,10 +14,10 @@
 </div>
 
 <div class="pull-right">
-    <button class="btn btn-sm btn-default" ng-click="vm.selectAll()">全选</button>
-    <button class="btn btn-sm btn-default" data-toggle="modal"
+    <button has-permission="Admin" class="btn btn-sm btn-default" ng-click="vm.selectAll()">全选</button>
+    <button has-permission="Admin" class="btn btn-sm btn-default" data-toggle="modal"
             data-target="#pubulishNewWordConfirmModal" ng-click="vm.publishAllConfirm()">发布</button>
-    <button class="btn btn-sm btn-default" data-toggle="modal"
+    <button has-permission="Admin" class="btn btn-sm btn-default" data-toggle="modal"
             data-target="#deleteNewWordConfirmModal" ng-click="vm.deleteAllConfirm()">删除</button>
 </div>
 
@@ -80,11 +80,12 @@
                      href="#collapse{{word.id}}" aria-expanded="true" style="cursor: pointer;">{{word.dictionary.shortName}}
                 </div>
                 <div class="text-primary col-xs-2">
-                    <button has-permission="Admin Editor" is-editable="{{word}}"
+                    <!-- <button has-permission="Admin Editor" is-editable="{{word}}" -->
+                    <button has-permission="Admin" is-editable="{{word}}"
                             class="btn btn-danger btn-xs ml2 pull-right" data-toggle="modal"
                             data-target="#deleteNewWordConfirmModal" ng-click="vm.deleteWordConfirm(word.id)"><span
                             class="glyphicon glyphicon-remove">删除</span></button>
-                    <button has-permission="Admin Editor" is-editable="{{word}}"
+                    <button has-permission="Admin" is-editable="{{word}}"
                             class="btn btn-warning btn-xs ml2 pull-right" ng-init="word.isEdit=false"
                             ng-click="word.isEdit = !word.isEdit">
                       <span ng-hide="word.isEdit" class="glyphicon glyphicon-edit">编辑</span>

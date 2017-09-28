@@ -35,6 +35,7 @@
                     url: '/manage',
                     templateUrl: 'views/manage.html',
                     controller: 'ManageCtrl',
+                    controllerAs: 'manageVM',
                     authenticate: true
                 })
                 .state('manage.newWords', {

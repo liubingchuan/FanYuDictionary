@@ -15,7 +15,7 @@
       var vm = this;
       vm.dictionaryList = {};
       vm.isEdit = false;
-
+      
       vm.dictionary = {};
       vm.dictionary.id = '';
       vm.dictionary.displayName = '';
@@ -44,7 +44,7 @@
 	        vm.dictionaryList = data;
 	      });
       }
-      
+            
       function createDictionary() {
         if (vm.dictionary.displayName == null || vm.dictionary.displayName == '') {
           alert('词典名不能为空');

@@ -7,6 +7,7 @@ var loginURI = baseURL+"login";
 var userURL = baseURL+"user";
 var dictURL = baseURL+"dictionary";
 var wordURL = baseURL + "word";
-
-
 var defaultDictionary = '梵汉大字典';
+
+
+var passwordConfirm = 'ys1234';

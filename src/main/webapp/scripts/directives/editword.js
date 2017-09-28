@@ -12,9 +12,9 @@ angular.module('fanYuFrontendApp')
 function createWord() {
     var createWordDirectiveController = createWordDirectiveController;
 
-    createWordDirectiveController.$inject = ['$scope', '$rootScope', '$sce', 'toastr', 'DictionaryService', 'WordService'];
+    createWordDirectiveController.$inject = ['$scope', '$state', '$rootScope', '$location', '$sce', 'toastr', 'DictionaryService', 'WordService'];
 
-    function createWordDirectiveController($scope, $rootScope, $sce, toastr, DictionaryService, WordService) {
+    function createWordDirectiveController($scope, $state, $rootScope, $location, $sce, toastr, DictionaryService, WordService) {
 
         $scope.dicEditAuth = dicEditAuth;
         var vm = this;
@@ -44,6 +44,7 @@ function createWord() {
                     //设置默认辞典。如果当前没有设置默认词典也就是id为undefined，或者为所设置的默认词典时，给word.dictionary赋值。
                     if (vm.word.dictionary.id == undefined || $rootScope.fan_dictionaryList[i].displayName === defaultDictionary) {
                         vm.word.dictionary = $rootScope.fan_dictionaryList[i];
+                        //vm.word.dictionary = '';
                     }
                 }
             }
@@ -61,9 +62,11 @@ function createWord() {
                 if (dicEditAuth($rootScope.zang_dictionaryList[i])) {
                     vm.zang_dictionaryList.push($rootScope.zang_dictionaryList[i]);
                     //设置默认辞典。如果当前没有设置默认词典也就是id为undefined，或者为所设置的默认词典时，给word.dictionary赋值。
-                    if (vm.word.dictionary == {} || $rootScope.zang_dictionaryList[i].displayName === defaultDictionary) {
+                    vm.word.dictionary = $rootScope.zang_dictionaryList[i];
+                    /*if (vm.word.dictionary == {} || $rootScope.zang_dictionaryList[i].displayName === defaultDictionary) {
                         vm.word.dictionary = $rootScope.zang_dictionaryList[i];
-                    }
+                    
+                    }*/
                 }
 
             }
@@ -78,9 +81,11 @@ function createWord() {
                 if (dicEditAuth($rootScope.han_dictionaryList[i])) {
                   vm.han_dictionaryList.push($rootScope.han_dictionaryList[i]);
                   //设置默认辞典。如果当前没有设置默认词典也就是id为undefined，或者为所设置的默认词典时，给word.dictionary赋值。
-                  if (vm.word.dictionary == {} || $rootScope.han_dictionaryList[i].displayName === defaultDictionary) {
-                    vm.word.dictionary = $rootScope.han_dictionaryList[i];
-                  }
+                  vm.word.dictionary = $rootScope.han_dictionaryList[i];
+                  /*if (vm.word.dictionary == {} || $rootScope.han_dictionaryList[i].displayName === defaultDictionary) {
+                	  vm.word.dictionary = $rootScope.han_dictionaryList[i];
+                	  
+                  }*/
                 }
             }
         });
@@ -216,6 +221,9 @@ function createWord() {
             	else {
             		WordService.createNewWord(vm.word, 'N');
             	}
+            	
+            	//$location.path('/myWords');
+            	$state.go('manage.myWords');
                 
             } else {
                 WordService.updateWord(vm.word).then(success).catch(fail);
@@ -224,7 +232,7 @@ function createWord() {
                 //编辑词条成功，发布成功事件。
                 cloneToWordSource(vm.word);
                 $scope.$emit('updateWordSuccess', vm.word.id);
-                toastr.success('词条创建成功');
+                toastr.success('词条创建成功');     
             }
 
             function fail(error) {

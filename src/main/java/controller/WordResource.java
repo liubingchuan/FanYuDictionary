@@ -155,10 +155,19 @@ public class WordResource {
 				String blockName = this.orderService.getBlockName(dicGroup);
 				list = this.orderService.getOrderedWords(list, blockName);
 			}
+			
+			List<String> words = new ArrayList<String>();
+			for(String s: list) {
+				if(s.contains("'")) {
+					words.add(s.replace("'", "’"));
+				}else {
+					words.add(s);
+				}
+			}
 
 			LOGGER.info("return the words list in getWords ------"
 					+ new SimpleDateFormat("yyyy MM dd HH mm ss").format(new Date()));
-			return Response.status(200).entity(this.wordService.listToJson(list)).type("application/json").build();
+			return Response.status(200).entity(this.wordService.listToJson(words)).type("application/json").build();
 		}
 
 		Pagination<Word> pagination = null;
@@ -336,6 +345,9 @@ public class WordResource {
 	public Response getWordByName(@PathParam("wordName") String wordName, @PathParam("logon") String logon) {
 		if ((wordName == null) || ("".equals(wordName))) {
 			return Response.status(200).entity("").type("text/plain").build();
+		}
+		if(wordName.contains("’")) {
+			wordName = wordName.replace("’", "'");
 		}
 		List<Word> list = this.wordService.findWordByName(wordName, logon);
 		boolean published = false;

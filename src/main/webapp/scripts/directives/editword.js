@@ -31,6 +31,7 @@ function createWord() {
         vm.changeIconBC = changeIconBC;
         vm.isBottomIcon = false;
         vm.isBottomIconBC = false;
+        vm.changeValue = changeValue;
 
         // 四类字典初始化；
         vm.fan_dictionaryList = [];
@@ -127,6 +128,20 @@ function createWord() {
         vm.shiyiShortcutButtons3 = ['〈藏〉', '〈巴〉', '〈混〉'];
         vm.shiyiShortcutButtons4 = [ '‹谶›', '‹安›', '‹谦›', '‹护›', '‹什›', '‹真›', '‹玄›', '‹义›','‹今›'];
         vm.shiyiShortcutButtons5 = ['①', '②', '③', '④', '⑤', '⑥', '⑦', '❶', '❷', '❸', '❹', '❺', '❻', '❼', '❽', '❾', '❿', '←', '→'];
+        
+        function changeValue() {
+         	var newDuiyingci = {
+                     name: vm.newDuiyingciName,
+                     value: vm.newDuiyingciValue
+                 }
+         	
+         	for (var i in vm.word.duiyingciList) {
+                 if (newDuiyingci.name == vm.word.duiyingciList[i].name) {
+                 	vm.newDuiyingciValue = vm.word.duiyingciList[i].value;
+                     return;
+                 }
+             }
+        }
         
         function addDuiyingci() {
             var newDuiyingci = {

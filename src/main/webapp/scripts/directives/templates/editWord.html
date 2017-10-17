@@ -99,7 +99,7 @@
 
                 <div class="row">
                     <div class="col-sm-1 pr0">
-                        <select class="form-control pl3" ng-model="createVM.newDuiyingciName">
+                        <select class="form-control pl3" ng-model="createVM.newDuiyingciName" ng-change="createVM.changeValue()">
                             <option ng-repeat="option in createVM.duiyingciOptionList" value="{{option}}">
                                 {{option}}
                             </option>

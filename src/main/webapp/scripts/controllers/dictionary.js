@@ -111,11 +111,16 @@
         }
 
         function setSearchMatch(matchValue) {
-            vm.search.match = matchValue;
+        	vm.search.match = matchValue;
         }
 
         function setSearchDomain(domainValue) {
             vm.search.domain = domainValue;
+            if (vm.search.domain !== 'danci' ) {
+        		vm.search.match = 'zhong';
+        		//$("input[name='match'][value='zhong']").attr("checked",true); 
+        		$("input[name='match'][type='radio']").get(2).checked = true;
+        	} 
         }
 
         function searchWord() {

@@ -102,14 +102,14 @@ function createWord() {
         vm.newGuanlianci = "";
 
         vm.tinymceOptions = {
-            plugins: "textcolor,link,table,code",
+        	plugins: "textcolor,link,table,code",
             menubar: false,
             language: 'zh_CN',
             statusbar: false,
             theme: "modern",
             skin: 'light',
             toolbar: [
-                "undo redo | link unlink | bold italic forecolor backcolor | table | image | code | alignleft aligncenter alignright"
+                "undo redo | link unlink | bold italic | forecolor backcolor emoticons | table | image | code | alignleft aligncenter alignright"
             ]
         };
 

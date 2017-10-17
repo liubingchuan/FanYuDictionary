@@ -5,7 +5,7 @@
         <li has-permission='Admin Editor' class="hide"><a ui-sref=".myWords">我的词条</a></li>
         <!-- <li has-permission='Admin' class="hide"><a ui-sref=".users">用户管理</a></li> -->
         <li has-permission='Admin' class="hide"><a  data-toggle="modal"
-                  data-target="#pwdUserConfirmModal" ng-click="manageVM.pwdConfirm(pwd)">用户管理</a>
+                  data-target="#pwdUserConfirmModal" ng-click="manageVM.pwdUserConfirm(pwd)">用户管理</a>
           	<!-- <a ui-sref=".users" ng-hide="!manageVM.isUsers"> -->         
         </li>
         <li has-permission='Admin' class="hide"><a  data-toggle="modal"
@@ -26,15 +26,15 @@
       </div>
       <div class="modal-body">
         
-        <form name="pwdForm"  novalidate="novalidate" class="form-horizontal ng-pristine ng-invalid ng-invalid-required">
+        <form name="pwdUserForm"  novalidate="novalidate" class="form-horizontal ng-pristine ng-invalid ng-invalid-required">
 	        <div class="form-group"
-	               ng-class="{ 'has-error': pwdForm.password.$invalid && !pwdForm.password.$pristine }">
+	               ng-class="{ 'has-error': pwdUserForm.password.$invalid && !pwdUserForm.password.$pristine }">
 	            <div class="input-group input-group-sm col-xs-12 mt10">
 	              <div class="col-xs-8"><input type="password" id="password" name="password" class="form-control"
-	                                           ng-model="manageVM.pwd"
+	                                           ng-model="manageVM.pwdUser"
 	                                           placeholder="密码" ng-minlength="6" ng-maxlength="16"/>
-	                <p ng-show="pwdForm.password.$error.minlength" class="help-block">您输入的密码不足六位</p>
-	                <p ng-show="pwdForm.password.$error.maxlength" class="help-block">您输入的密码超过十六位</p>
+	                <p ng-show="pwdUserForm.password.$error.minlength" class="help-block">您输入的密码不足六位</p>
+	                <p ng-show="pwdUserForm.password.$error.maxlength" class="help-block">您输入的密码超过十六位</p>
 	              </div>
 	              <div class="col-xs-4"><label class="text-info mt4">密码长度6-16位</label></div>
 	            </div>

@@ -59,7 +59,37 @@ public class WordService extends BaseService<Word> {
 									new BasicDBObject("$regex", MatchProperty.getRegex(matchEnum, word)))
 											.append("dictionary.id", new BasicDBObject("$in", dictionaryArray))
 											.append("status", "published");
-						} else {
+						} /*else if("duiyingci".equals(domain)){
+							BasicDBList values1 = new BasicDBList();
+							BasicDBList values2 = new BasicDBList();
+							BasicDBList values3 = new BasicDBList();
+							if("shou".equals(match)) {
+//								values1.add(new BasicDBObject(DomainProperty.getKey(domainEnum),
+//										new BasicDBObject("$regex", MatchProperty.getRegex(MatchProperty.SHOU, word)))
+//											.append("dictionary.id", new BasicDBObject("$in", dictionaryArray)));
+								values2.add(new BasicDBObject(DomainProperty.getKey(domainEnum),
+										new BasicDBObject("$regex", MatchProperty.getRegex(MatchProperty.ZHONG, "," + word)))
+										.append("dictionary.id", new BasicDBObject("$in", dictionaryArray)));
+//								queryCondition.put("$or", values1);
+								queryCondition.put("$or", values2);
+							}else if("zhong".equals("match")) {
+								values1.add(new BasicDBObject(DomainProperty.getKey(domainEnum),
+										new BasicDBObject("$regex", MatchProperty.getRegex(MatchProperty.ZHONG, word)))
+											.append("dictionary.id", new BasicDBObject("$in", dictionaryArray)));
+								
+								values2.add(new BasicDBObject(DomainProperty.getKey(domainEnum),
+										new BasicDBObject("$regex", "^((?!" + "," + word +").)*$")
+										.append("dictionary.id", new BasicDBObject("$in", dictionaryArray))));
+								
+								values3.add(new BasicDBObject(DomainProperty.getKey(domainEnum),
+										new BasicDBObject("$regex", ".+" + ",.+" + word + ".+"))
+											.append("dictionary.id", new BasicDBObject("$in", dictionaryArray)));
+								queryCondition.put("$or", values1);
+								queryCondition.put("$and", values2);
+								queryCondition.put("$or", values3);
+							}
+							
+						}*/ else {
 							queryCondition = new BasicDBObject(DomainProperty.getKey(domainEnum),
 									new BasicDBObject("$regex", MatchProperty.getRegex(matchEnum, word)))
 											.append("dictionary.id", new BasicDBObject("$in", dictionaryArray));

@@ -54,7 +54,8 @@ public enum DomainProperty implements BaseEnum {
 			sb.append("duiyingciList.value").append("-");
 			sb.append("bianxing").append("-");
 			sb.append("liju").append("-");
-			sb.append("word");
+			sb.append("word").append("-");
+			sb.append("baike");
 			answer = sb.toString();
 		}
 

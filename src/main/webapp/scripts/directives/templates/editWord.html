@@ -145,7 +145,23 @@
                 <textarea ng-init="createVM.tinymceOptions.height=100" ui-tinymce="createVM.tinymceOptions" ng-model="createVM.word.shiyi"></textarea>
 
                 <div style="padding: 5px 10px">
-                    <button class="btn btn-xs btn-default" ng-repeat="btn in createVM.shiyiShortcutButtons"
+                    <button class="btn btn-xs btn-default" ng-repeat="btn in createVM.shiyiShortcutButtons1"
+                            ng-click="createVM.setShiyi(btn)">{{btn}}
+                    </button>
+                    <br>
+                    <button class="btn btn-xs btn-default" ng-repeat="btn in createVM.shiyiShortcutButtons2"
+                            ng-click="createVM.setShiyi(btn)">{{btn}}
+                    </button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <button class="btn btn-xs btn-default" ng-repeat="btn in createVM.shiyiShortcutButtons3"
+                            ng-click="createVM.setShiyi(btn)">{{btn}}
+                    </button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <button class="btn btn-xs btn-default" ng-repeat="btn in createVM.shiyiShortcutButtons4"
+                            ng-click="createVM.setShiyi(btn)">{{btn}}
+                    </button>
+                    <br>
+                    <button class="btn btn-xs btn-default" ng-repeat="btn in createVM.shiyiShortcutButtons5"
                             ng-click="createVM.setShiyi(btn)">{{btn}}
                     </button>
                 </div>

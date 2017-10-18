@@ -120,7 +120,15 @@
         		vm.search.match = 'zhong';
         		//$("input[name='match'][value='zhong']").attr("checked",true); 
         		$("input[name='match'][type='radio']").get(2).checked = true;
+        		$("input[name='match'][type='radio']").get(0).disabled = true;
+        		$("input[name='match'][type='radio']").get(1).disabled = true;
+        		$("input[name='match'][type='radio']").get(3).disabled = true;
+        	} else {
+        		$("input[name='match'][type='radio']").get(0).disabled = false;
+        		$("input[name='match'][type='radio']").get(1).disabled = false;
+        		$("input[name='match'][type='radio']").get(3).disabled = false;
         	} 
+            
         }
 
         function searchWord() {

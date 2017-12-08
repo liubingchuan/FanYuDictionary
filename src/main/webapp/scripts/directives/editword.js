@@ -108,7 +108,7 @@ function createWord() {
             language: 'zh_CN',
             statusbar: false,
             theme: "modern",
-            skin: 'light',
+            skin: 'lightgray',
             toolbar: [
                 "undo redo | link unlink | bold italic | forecolor backcolor emoticons | table | image | code | alignleft aligncenter alignright"
             ]

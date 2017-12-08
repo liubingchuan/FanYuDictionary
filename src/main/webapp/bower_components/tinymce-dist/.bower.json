@@ -24,8 +24,7 @@
     "tag": "4.1.10",
     "commit": "503d6fe1e69bd9830d39689b6e32a6c7ebffb861"
   },
-  "_source": "git://github.com/tinymce/tinymce-dist.git",
-  "_target": "~4.1.10",
-  "_originalSource": "tinymce",
-  "_direct": true
+  "_source": "https://github.com/tinymce/tinymce-dist.git",
+  "_target": "~4.1.0",
+  "_originalSource": "tinymce-dist"
 }

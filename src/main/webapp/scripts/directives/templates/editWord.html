@@ -30,8 +30,14 @@
             </ul>
         </div>
         <div class="dropdown pl3 pull-left" has-permission="Admin Editor">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
-                    aria-expanded="true" ng-model="createVM.word.dictionary.displayName">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" ng-hide="createVM.word.id != undefined" data-toggle="dropdown"
+                    aria-expanded="true" ng-model="createVM.word.dictionary.displayName"> 
+                <!-- {{createVM.word.dictionary.displayName}} -->
+              	  请选择归属词典
+                <span class="caret"></span>
+            </button>
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" ng-hide="createVM.word.id == undefined" data-toggle="dropdown"
+                    aria-expanded="true" ng-model="createVM.word.dictionary.displayName"> 
                 {{createVM.word.dictionary.displayName}}
                 <span class="caret"></span>
             </button>

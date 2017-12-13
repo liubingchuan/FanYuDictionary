@@ -75,7 +75,7 @@
             var output = input;
             switch (input) {
               case 'danci': output = "单词"; break;
-              case 'duiyingci': output = "对应词"; break;
+              case 'duiyingci': output = "对译词"; break;
               case 'bianxing': output = "变形"; break;
               case 'liju': output = "例句"; break;
               case 'quanwen': output = "全文"; break;

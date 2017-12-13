@@ -79,7 +79,7 @@
                 checked: true
             },
             {
-                domainName: "对应词",
+                domainName: "对译词",
                 domainValue: "duiyingci",
                 checked: false
             },

@@ -12,16 +12,17 @@
                             data-target="#pubulishWordConfirmModal"
                             ng-click="showWordVM.publishWordConfirm(word.id)"><span
                             class="glyphicon glyphicon-upload">发布</span></button>
-                    <button has-permission="Admin Editor" is-editable="{{word}}" ng-hide="word.importflag" class="btn btn-warning btn-xs hide"
+                    <button has-permission="Admin Editor" is-editable="{{word}}" ng-hide="word.importflag == true && currentUser.role == 'Editor'" class="btn btn-warning btn-xs hide"
                             ng-init="word.isEdit=false"
                             ng-click="word.isEdit = !word.isEdit">
                       <span ng-hide="word.isEdit" class="glyphicon glyphicon-edit">编辑</span>
                       <span ng-hide="!word.isEdit" class="glyphicon glyphicon-remove-circle">取消</span>
                     </button>
-                    <button has-permission="Admin Editor" is-editable="{{word}}" ng-hide="word.importflag" class="btn btn-danger btn-xs hide" data-toggle="modal"
+                    <button has-permission="Admin Editor" is-editable="{{word}}" ng-hide="word.importflag == true && currentUser.role == 'Editor'" class="btn btn-danger btn-xs hide" data-toggle="modal"
                             data-target="#deleteWordConfirmModal"
                             ng-click="showWordVM.deleteWordConfirm(word.id)">
-                        <span class="glyphicon glyphicon-remove">删除</span></button>
+                        <span class="glyphicon glyphicon-remove">删除</span>
+                    </button>
                 </div>
             </div>
             <div class="panel-body">

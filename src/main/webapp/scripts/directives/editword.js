@@ -63,8 +63,7 @@ function createWord() {
                 if (dicEditAuth($rootScope.zang_dictionaryList[i])) {
                     vm.zang_dictionaryList.push($rootScope.zang_dictionaryList[i]);
                     //设置默认辞典。如果当前没有设置默认词典也就是id为undefined，或者为所设置的默认词典时，给word.dictionary赋值。
-                    //vm.word.dictionary = $rootScope.zang_dictionaryList[i];
-                    if (vm.word.dictionary == {} || $rootScope.zang_dictionaryList[i].displayName === defaultDictionary) {
+                    if (vm.word.dictionary.id == undefined || $rootScope.zang_dictionaryList[i].displayName === defaultDictionary) {
                         vm.word.dictionary = $rootScope.zang_dictionaryList[i];
                     
                     }
@@ -82,8 +81,7 @@ function createWord() {
                 if (dicEditAuth($rootScope.han_dictionaryList[i])) {
                   vm.han_dictionaryList.push($rootScope.han_dictionaryList[i]);
                   //设置默认辞典。如果当前没有设置默认词典也就是id为undefined，或者为所设置的默认词典时，给word.dictionary赋值。
-                  //vm.word.dictionary = $rootScope.han_dictionaryList[i];
-                  if (vm.word.dictionary == {} || $rootScope.han_dictionaryList[i].displayName === defaultDictionary) {
+                  if (vm.word.dictionary.id == undefined || $rootScope.han_dictionaryList[i].displayName === defaultDictionary) {
                 	  vm.word.dictionary = $rootScope.han_dictionaryList[i];
                 	  
                   }

@@ -15,7 +15,7 @@
                 
             </div>
             <!--<div>{{dicVM.search.code}}/{{dicVM.search.match}}/{{dicVM.search.domain}}</label></div>-->
-            <div class="input-group input-group-sm">
+            <!-- <div class="input-group input-group-sm">
             	<div class="col-xs-8">{{dicVM.search.code | mapCode}}/{{dicVM.search.match | mapMatch}}/{{dicVM.search.domain | mapDomain}}</div>
             	<div class="input-group-btn">
                     <button type="submit" class="btn btn-default" ng-click="dicVM.searchWord()"><span
@@ -23,7 +23,23 @@
                     <button type="button" class="btn btn-default" data-toggle="collapse" href="#collapseSearchSettings" onclick=" $('#collapseSoftKeys').collapse('hide');">
                         <span class="glyphicon glyphicon-cog"></span></button>
                 </div>
+            </div> -->
+            <div class="input-group input-group-sm col-sm-12">
+            	<div class="col-xs-8">&#8226&nbsp{{dicVM.search.code | mapCode}}</div>
             </div>
+            <div class="input-group input-group-sm col-sm-12">
+            	<div class="col-xs-8">&#8226&nbsp{{dicVM.search.match | mapMatch}}</div>
+            	<div class="input-group-btn">
+                    <button type="submit" class="btn btn-default" ng-click="dicVM.searchWord()"><span
+                            class="glyphicon glyphicon-search"></span></button>
+                    <button type="button" class="btn btn-default" data-toggle="collapse" href="#collapseSearchSettings" onclick=" $('#collapseSoftKeys').collapse('hide');">
+                        <span class="glyphicon glyphicon-cog"></span></button>
+                </div>
+            </div>
+            <div class="input-group input-group-sm col-sm-12">
+            	<div class="col-xs-8">&#8226&nbsp{{dicVM.search.domain | mapDomain}}</div>
+            </div>
+            
             
         </form>
         <!-- /input-group -->

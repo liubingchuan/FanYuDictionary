@@ -249,7 +249,12 @@ function createWord() {
             	$state.go('manage.myWords');
                 
             } else {
-                WordService.updateWord(vm.word).then(success).catch(fail);
+            	if ($rootScope.currentUser.role === 'Admin') {
+            		WordService.updateWord(vm.word, 'Y').then(success).catch(fail);
+            	}
+            	else {
+            		WordService.updateWord(vm.word, 'N').then(success).catch(fail);
+            	}
             }
             function success(response) {
                 //编辑词条成功，发布成功事件。

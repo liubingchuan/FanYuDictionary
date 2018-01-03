@@ -55,8 +55,8 @@
             }
         }
 
-        function updateWord(word) {
-            return $http.put(wordURL + '/' + word.id, word);
+        function updateWord(word, roleFlag) {
+            return $http.put(wordURL + '/' + word.id + '/' + roleFlag, word);
         }
 
         function publishWord(wordId) {

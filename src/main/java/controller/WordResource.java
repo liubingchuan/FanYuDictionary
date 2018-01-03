@@ -124,6 +124,9 @@ public class WordResource {
 			dictionaries = this.dictionaryService.filtByDicGroup(dictionaries);
 			
 			
+			if(word.contains("’")) {
+				word = word.replaceAll("’", "'");
+			}
 			
 			// 根据code 选择 HK 模糊 unicode编码方式
 			List<String> list = new ArrayList<String>();
@@ -325,16 +328,33 @@ public class WordResource {
 
 	@PUT
 	@Produces({ "text/plain" })
-	@Path("{wordId}")
+	@Path("{wordId}/{role}")
 	@RequiresRoles(value = { "Editor", "Admin" }, logical = Logical.OR)
-	public Response updateWord(@PathParam("wordId") String wordId, String body) {
+	public Response updateWord(@PathParam("wordId") String wordId, @PathParam("role") String role, String body) {
 		if ((wordId == null) || ("".equals(wordId))) {
 			return Response.status(412).entity("请传入wordId").type("text/plain").build();
 		}
 		Word word = (Word) this.wordService.jsonToEntity(body, Word.class);
+		
+//		body = this.wordService.entityToJson(word);
+		if(!"Y".equals(role)) {
+			this.wordService.updateById(wordId, body);
+		}else{
+			if("published".equals(word.getStatus())) {
+				this.wordService.updateById(wordId, body);
+			}else {
+				Word newWord = (Word) this.wordService.jsonToEntity(body, Word.class);
+				Date date = new Date();
+				String id = UUID.randomUUID().toString();
+				newWord.setId(id);
+				newWord.setCreateDateTime(date.getTime());
+				newWord.setLastEditDateTime(date.getTime());
+				newWord.setImportflag(false);
+				newWord.setStatus("published");
+				this.wordService.save(newWord);
+			}
+		}
 
-		body = this.wordService.entityToJson(word);
-		this.wordService.updateById(wordId, body);
 		LOGGER.info("update word successfully-------------"
 				+ new SimpleDateFormat("yyyy MM dd HH mm ss").format(new Date()));
 		return Response.status(200).entity("success").type("text/plain").build();

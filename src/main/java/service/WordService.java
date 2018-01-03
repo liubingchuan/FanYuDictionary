@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
+import com.mongodb.DBCursor;
 
 import entity.Word;
 import enumeration.DomainProperty;
@@ -90,6 +91,23 @@ public class WordService extends BaseService<Word> {
 							}
 							
 						}*/ else {
+							if(DomainProperty.DUIYINGCI.equals(domainEnum)) {
+								BasicDBObject query = new BasicDBObject();   
+							       BasicDBObject field = new BasicDBObject();   
+							       field.put("duiyingci", 1);
+							       DBCursor cursor = this.mongoTemplate.getCollection(getCollectionName()).find(query, field);   
+							       while(cursor.hasNext()){   
+							            BasicDBObject result = (BasicDBObject) cursor.next();   
+							            int i = result.size();  
+							            System.out.println("Result Size: "+i);  
+							            System.out.println(result);  
+							            ArrayList<BasicDBObject> versi=(ArrayList<BasicDBObject>)result.get("duiyingci");  
+							            for(BasicDBObject embedded:versi){  
+							                String value  = embedded.getString("value");  
+							                System.out.println("value:"+value);  
+							            }  
+							    }
+							}
 							queryCondition = new BasicDBObject(DomainProperty.getKey(domainEnum),
 									new BasicDBObject("$regex", MatchProperty.getRegex(matchEnum, word)))
 											.append("dictionary.id", new BasicDBObject("$in", dictionaryArray));

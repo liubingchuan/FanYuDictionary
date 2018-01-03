@@ -370,22 +370,22 @@ public class WordResource {
 			wordName = wordName.replace("’", "'");
 		}
 		List<Word> list = this.wordService.findWordByName(wordName, logon);
-		boolean published = false;
-		for(Word word: list) {
-			if("published".equals(word.getStatus())) {
-				published = true;
-				break;
-			}
-		}
-		if (published == true) {
-			for(Word word: list) {
-				word.setStatus("published");
-			}
-		}else {
-			for(Word word: list) {
-				word.setStatus("unpublished");
-			}
-		}
+//		boolean published = false;
+//		for(Word word: list) {
+//			if("published".equals(word.getStatus())) {
+//				published = true;
+//				break;
+//			}
+//		}
+//		if (published == true) {
+//			for(Word word: list) {
+//				word.setStatus("published");
+//			}
+//		}else {
+//			for(Word word: list) {
+//				word.setStatus("unpublished");
+//			}
+//		}
 
 		LOGGER.info(
 				"return the words detail info------" + new SimpleDateFormat("yyyy MM dd HH mm ss").format(new Date()));

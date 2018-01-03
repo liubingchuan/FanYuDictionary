@@ -8,10 +8,10 @@
             <div class="panel-heading">
                 <span ng-bind="word.status=='published'?word.dictionary.displayName:word.author.displayName"></span>
                 <div class="text-primary pull-right">
-                    <button has-permission="Admin" ng-hide="word.importflag || word.status2=='published'" class="btn btn-success btn-xs hide" data-toggle="modal"
+                    <button has-permission="Admin" ng-hide="word.importflag == true || word.status =='published'" class="btn btn-success btn-xs hide" data-toggle="modal"
                             data-target="#pubulishWordConfirmModal"
                             ng-click="showWordVM.publishWordConfirm(word.id)"><span
-                            class="glyphicon glyphicon-upload">发布</span></button>
+                            class="glyphicon glyphicon-upload">发布-----</span></button>
                     <button has-permission="Admin Editor" is-editable="{{word}}" ng-hide="word.importflag == true && currentUser.role == 'Editor'" class="btn btn-warning btn-xs hide"
                             ng-init="word.isEdit=false"
                             ng-click="word.isEdit = !word.isEdit">

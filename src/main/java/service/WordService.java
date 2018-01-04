@@ -33,6 +33,10 @@ public class WordService extends BaseService<Word> {
 	@SuppressWarnings("unchecked")
 	public List<String> findByParams(String word, String match, String domain, String dictionaries, String logon) {
 		String[] dictionaryArray = dictionaries.split("@");
+		List<String> dicList = new ArrayList<String>();
+		for(String s : dictionaryArray) {
+			dicList.add(s);
+		}
 
 		for (MatchProperty matchEnum : MatchProperty.values()) {
 			if (match.equals(matchEnum.getValue())) {
@@ -92,25 +96,23 @@ public class WordService extends BaseService<Word> {
 							
 						}*/ else {
 							if(DomainProperty.DUIYINGCI.equals(domainEnum)) {
-								BasicDBObject query = new BasicDBObject();   
-							       BasicDBObject field = new BasicDBObject();   
-							       field.put("duiyingci", 1);
-							       DBCursor cursor = this.mongoTemplate.getCollection(getCollectionName()).find(query, field);   
-							       while(cursor.hasNext()){   
-							            BasicDBObject result = (BasicDBObject) cursor.next();   
-							            int i = result.size();  
-							            System.out.println("Result Size: "+i);  
-							            System.out.println(result);  
-							            ArrayList<BasicDBObject> versi=(ArrayList<BasicDBObject>)result.get("duiyingci");  
-							            for(BasicDBObject embedded:versi){  
-							                String value  = embedded.getString("value");  
-							                System.out.println("value:"+value);  
-							            }  
-							    }
+								Query query = Query.query(Criteria.where("dictionary.id").in(dicList).and("duiyingciList").elemMatch(Criteria.where("value").is("chos")));
+								List<Word> words = this.mongoTemplate.find(query, Word.class);
+								List<String> wordNames = new ArrayList<String>();
+								if(words != null && words.size() != 0) {
+									for(Word w: words) {
+										wordNames.add(w.getWord());
+									}
+									return wordNames;
+								}else {
+									return null;
+								}
+//								System.out.println(words.size());
+							}else {
+								queryCondition = new BasicDBObject(DomainProperty.getKey(domainEnum),
+										new BasicDBObject("$regex", MatchProperty.getRegex(matchEnum, word)))
+										.append("dictionary.id", new BasicDBObject("$in", dictionaryArray));
 							}
-							queryCondition = new BasicDBObject(DomainProperty.getKey(domainEnum),
-									new BasicDBObject("$regex", MatchProperty.getRegex(matchEnum, word)))
-											.append("dictionary.id", new BasicDBObject("$in", dictionaryArray));
 						}
 
 						return this.mongoTemplate.getCollection(getCollectionName()).distinct("word", queryCondition);

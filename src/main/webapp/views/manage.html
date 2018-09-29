@@ -8,7 +8,7 @@
                   data-target="#pwdUserConfirmModal" ng-click="manageVM.pwdUserConfirm(pwd)">用户管理</a>
           	<!-- <a ui-sref=".users" ng-hide="!manageVM.isUsers"> -->         
         </li>
-        <li has-permission='Admin' class="hide"><a  data-toggle="modal"
+        <li has-permission='Admin' class="hide"><a data-toggle="modal"
                   data-target="#pwdDicConfirmModal" ng-click="manageVM.pwdConfirm(pwd)">词典管理</a>
                   <!-- <a ui-sref=".managedictionary">词典管理</a> -->
         </li>
@@ -43,8 +43,8 @@
         
       </div>
       <div class="modal-footer">
-        <button class="btn btn-danger" ng-click="manageVM.pwdUserConfirmed()">提交</button>
-        <button class="btn" data-dismiss="modal">取消</button>
+        <button type="submit" class="btn btn-primary" ng-click="manageVM.pwdUserConfirmed()">提交</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
       </div>
     </div>
   </div>

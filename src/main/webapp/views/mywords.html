@@ -3,8 +3,8 @@
     <div class="col-xs-8">
         <div class="pull-right">
             <button class="btn btn-sm btn-default" ng-click="vm.selectAll()">全选</button>
-            <button class="btn btn-sm btn-default" data-toggle="modal"
-                    data-target="#pubulishMyWordConfirmModal" ng-click="vm.publishAllConfirm()">发布</button>
+            <!-- <button class="btn btn-sm btn-default" data-toggle="modal"
+                    data-target="#pubulishMyWordConfirmModal" ng-click="vm.publishAllConfirm()">发布</button> -->
             <button class="btn btn-sm btn-default" data-toggle="modal"
                     data-target="#deleteMyWordConfirmModal" ng-click="vm.deleteAllConfirm()">删除</button>
         </div>
@@ -73,7 +73,7 @@
                     <button has-permission="Admin Editor" is-editable="{{word}}" ng-hide="word.importflag"
                             class="btn btn-danger btn-xs ml2 pull-right" data-toggle="modal"
                             data-target="#deleteMyWordConfirmModal" ng-click="vm.deleteWordConfirm(word.id)"><span
-                            class="glyphicon glyphicon-remove" ng-hide="vm.importflag" >删除</span></button>
+                            class="glyphicon glyphicon-remove" ng-hide="vm.importflag  == true || word.status == 'published' && currentUser.role == 'Editor'" >删除</span></button>
                     <button has-permission="Admin Editor" is-editable="{{word}}" ng-hide="word.importflag"
                             class="btn btn-warning btn-xs ml2 pull-right" ng-init="word.isEdit=false"
                             ng-click="word.isEdit = !word.isEdit">

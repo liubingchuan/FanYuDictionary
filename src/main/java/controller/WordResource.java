@@ -143,21 +143,22 @@ public class WordResource {
 			} 
 			
 			
-			if ((list != null) && (list.size() != 0)) {
-				String[] dictionaryArray = dictionaries.split("@");
-				String dicGroup = "";
-				if ((dictionaryArray != null) && (dictionaryArray.length != 0)) {
-					for (String s : dictionaryArray) {
-						Dictionary dictionary = this.dictionaryService.findById(s);
-						if (dictionary != null) {
-							dicGroup = dictionary.getDicGroup();
-							break;
-						}
+			if ((list == null) || (list.size() == 0)) {
+				return Response.status(404).entity(null).type("application/json").build();
+			}
+			String[] dictionaryArray = dictionaries.split("@");
+			String dicGroup = "";
+			if ((dictionaryArray != null) && (dictionaryArray.length != 0)) {
+				for (String s : dictionaryArray) {
+					Dictionary dictionary = this.dictionaryService.findById(s);
+					if (dictionary != null) {
+						dicGroup = dictionary.getDicGroup();
+						break;
 					}
 				}
-				String blockName = this.orderService.getBlockName(dicGroup);
-				list = this.orderService.getOrderedWords(list, blockName);
 			}
+			String blockName = this.orderService.getBlockName(dicGroup);
+			list = this.orderService.getOrderedWords(list, blockName);
 			
 			List<String> words = new ArrayList<String>();
 			for(String s: list) {

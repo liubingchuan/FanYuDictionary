@@ -96,7 +96,7 @@ public class WordService extends BaseService<Word> {
 							
 						}*/ else {
 							if(DomainProperty.DUIYINGCI.equals(domainEnum)) {
-								Query query = Query.query(Criteria.where("dictionary.id").in(dicList).and("duiyingciList").elemMatch(Criteria.where("value").is("chos")));
+								Query query = Query.query(Criteria.where("dictionary.id").in(dicList).and("duiyingciList").elemMatch(Criteria.where("value").regex(".*" + word + ".*")));
 								List<Word> words = this.mongoTemplate.find(query, Word.class);
 								List<String> wordNames = new ArrayList<String>();
 								if(words != null && words.size() != 0) {

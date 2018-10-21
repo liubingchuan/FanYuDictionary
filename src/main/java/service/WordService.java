@@ -48,6 +48,9 @@ public class WordService extends BaseService<Word> {
 						if ("quanwen".equals(domain)) {
 							BasicDBList values = new BasicDBList();
 							key = DomainProperty.getKey(domainEnum);
+							if(!key.contains("shiyi")) {
+								key += "-shiyi";
+							}
 							for (String item : key.split("-")) {
 								if (logon.equals("N"))
 									values.add(new BasicDBObject(item, new BasicDBObject("$regex", ".*" + word + ".*"))
@@ -59,12 +62,12 @@ public class WordService extends BaseService<Word> {
 								}
 							}
 							queryCondition.put("$or", values);
-						} else if (logon.equals("N")) {
+						}/* else if (logon.equals("N")) {
 							queryCondition = new BasicDBObject(DomainProperty.getKey(domainEnum),
 									new BasicDBObject("$regex", MatchProperty.getRegex(matchEnum, word)))
 											.append("dictionary.id", new BasicDBObject("$in", dictionaryArray))
 											.append("status", "published");
-						} /*else if("duiyingci".equals(domain)){
+						}*/ /*else if("duiyingci".equals(domain)){
 							BasicDBList values1 = new BasicDBList();
 							BasicDBList values2 = new BasicDBList();
 							BasicDBList values3 = new BasicDBList();
@@ -96,16 +99,22 @@ public class WordService extends BaseService<Word> {
 							
 						}*/ else {
 							if(DomainProperty.DUIYINGCI.equals(domainEnum)) {
-								Query query = Query.query(Criteria.where("dictionary.id").in(dicList).and("duiyingciList").elemMatch(Criteria.where("value").regex(".*" + word + ".*")));
-								List<Word> words = this.mongoTemplate.find(query, Word.class);
-								List<String> wordNames = new ArrayList<String>();
-								if(words != null && words.size() != 0) {
-									for(Word w: words) {
-										wordNames.add(w.getWord());
-									}
-									return wordNames;
-								}else {
-									return null;
+//								Query query = Query.query(Criteria.where("dictionary.id").in(dicList).and("duiyingciList").elemMatch(Criteria.where("value").regex(".*" + word + ".*")));
+//								List<Word> words = this.mongoTemplate.find(query, Word.class);
+//								List<String> wordNames = new ArrayList<String>();
+//								if(words != null && words.size() != 0) {
+//									for(Word w: words) {
+//										wordNames.add(w.getWord());
+//									}
+//									return wordNames;
+//								}else {
+//									return null;
+//								}
+								queryCondition = new BasicDBObject(DomainProperty.getKey(domainEnum),
+										new BasicDBObject("$regex", MatchProperty.getRegex(matchEnum, word)))
+												.append("dictionary.id", new BasicDBObject("$in", dictionaryArray));
+								if(logon.equals("N")) {
+									queryCondition.append("status", "published");
 								}
 //								System.out.println(words.size());
 							}else {

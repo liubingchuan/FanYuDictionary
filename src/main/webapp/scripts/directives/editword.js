@@ -32,6 +32,8 @@ function createWord() {
         vm.isBottomIcon = false;
         vm.isBottomIconBC = false;
         vm.changeValue = changeValue;
+        vm.dictionaryOwnSaveConfirmed = dictionaryOwnSaveConfirmed;
+        vm.dictionaryOwnSave = dictionaryOwnSave;
 
         // 四类字典初始化；
         vm.fan_dictionaryList = [];
@@ -225,6 +227,20 @@ function createWord() {
             vm.isBottomIconBC = !vm.isBottomIconBC;
         }
 
+        function dictionaryOwnSaveConfirmed() {
+        	/*vm.word.id = wordId;*/
+        }
+        
+        function dictionaryOwnSave() {
+        	
+        	$('#dictionaryOwnConfirmModal').modal('hide');
+        	
+        	saveWord();        	
+        	
+        	//$state.reload();
+        	//$window.location.reload();
+        }
+        
         function saveWord() {
             //如果是freestyle的编辑方式，将其编辑内容存入shiyi中。（不能讲两个编辑框都绑定到word.shiyi,编辑器会出问题）
             if (vm.word.template == "freeStyle") {
@@ -260,7 +276,8 @@ function createWord() {
                 //编辑词条成功，发布成功事件。
                 cloneToWordSource(vm.word);
                 $scope.$emit('updateWordSuccess', vm.word.id);
-                toastr.success('词条创建成功');     
+                toastr.success('词条创建成功');   
+                
             }
 
             function fail(error) {

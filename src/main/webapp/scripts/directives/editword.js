@@ -229,14 +229,24 @@ function createWord() {
 
         function dictionaryOwnSaveConfirmed() {
         	/*vm.word.id = wordId;*/
+        	 
         }
         
         function dictionaryOwnSave() {
         	
         	$('#dictionaryOwnConfirmModal').modal('hide');
+        	saveWord(); // $state.go 跳转 会导致modal hide 之后页面还是灰色 不可操作. 因为生成了一个遮罩层 modal-backdrop div
+        	        	
+        	$('.modal-backdrop').remove(); // remove 遮罩层 modal-backdrop div, 但是modal框 中.model-open{ overflow:hidden;} 存在,导致页面滚动条消失,需要新的modal 来激活
+        	$('body').removeClass('modal-open'); // 移除 modal框中的model-open, 使滚动条恢复
+        	        	
         	
-        	saveWord();        	
         	
+        	/*$('#dictionaryOwnConfirmModal').on('hide.bs.modal', function() {
+        		$('body').removeClass('modal-open');
+        		$('body').css('padding-right','0px');
+        	})*/
+
         	//$state.reload();
         	//$window.location.reload();
         }

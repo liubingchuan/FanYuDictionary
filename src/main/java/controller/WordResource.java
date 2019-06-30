@@ -51,7 +51,7 @@ import service.OrderService;
 import service.WordService;
 import utils.CompressUtil;
 import utils.Pagination;
-import utils.RequestUtil;
+//import utils.RequestUtil;
 
 @SuppressWarnings("deprecation")
 @Path("/word")
@@ -662,7 +662,7 @@ public class WordResource {
 				}
 			}
 		}
-		RequestUtil.outStream(request, response, "export" + new Date().getTime() + ".zip", in);
+//		RequestUtil.outStream(request, response, "export" + new Date().getTime() + ".zip", in);
 	}
 
 	@GET
